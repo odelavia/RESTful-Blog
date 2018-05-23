@@ -92,5 +92,16 @@ app.put('/blogs/:id', (req, res) => {
   });
 })
 
+// delete route. delete a blog post
+app.delete('/blogs/:id', (req, res) => {
+  Blog.findByIdAndRemove(req.params.id, (err) => {
+    if(err) {
+      res.redirect('/blogs');
+    } else {
+      res.redirect('/blogs');
+    }
+  });
+})
+
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 app.listen(5000, () => console.log('glasskey server is listening on port 5000!'));

@@ -6,5 +6,9 @@
   <span><%= blog.created %></span>
   <p><%= blog.body %></p>
 </div>
+<a class="btn" href="/blogs/<%= blog._id %>/edit">Edit</a>
+<form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+  <button>Delete</button>
+</form>
 
 <% include partials/footer %>
