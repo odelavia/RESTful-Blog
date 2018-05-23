@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser'),
+methodOverride   = require('method-override'),
 mongoose         = require('mongoose'),
 express          = require('express'),
 path             = require('path'),
@@ -9,6 +10,7 @@ mongoose.connect('mongodb://localhost/restful_blog');
 app.set('view engine', 'ejs');  //allows us to use EJS and also not have to type .EJS
 app.use(express.static(__dirname + '../client/dist'));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 //mongoose model config
 var blogSchema = new mongoose.Schema({
@@ -67,6 +69,28 @@ app.post('/blogs', (req, res) => {
     }
   });
 });
+
+// edite route. edit current blog post.
+app.get('/blogs/:id/edit', (req, res) => {
+  Blog.findById(req.params.id, (err, foundBlog) => {
+    if(err) {
+      res.redirect('/blogs');
+    } else {
+      res.render('../client/src/views/edit', {blog: foundBlog});
+    }
+  });
+})
+
+// update route. update current blog post
+app.put('/blogs/:id', (req, res) => {
+  Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
+    if(err) {
+      res.redirect('/blogs');
+    } else {
+      res.redirect('/blogs/' + req.params.id);
+    }
+  });
+})
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 app.listen(5000, () => console.log('glasskey server is listening on port 5000!'));

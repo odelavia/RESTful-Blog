@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<div>
+    <div class="new-blog-container">Edit <%= blog.title %></div>
+    <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST">  <!-- ?_method=PUT is work around for how PUT turns into GET request-->
+      <input type="text" name="blog[title]" value="<%= blog.title %>">
+      <input type="text" name="blog[image]" value="<%= blog.image %>">
+      <textarea name="blog[body]"><%= blog.body %></textarea>
+      <input type="submit">
+    </form>
+  </div>
+
+<% include partials/footer %>
+
