@@ -42,37 +42,31 @@ app.get('/blogs', (req, res) => {
   });
 });
 
-// create route. Add new blog post to DB.
-// app.post('/blogs', (req, res) => {
-//   var title = req.body.title;
-//   var image = req.body.image;
-//   var body = req.body.body;
-//   var created = req.body.created;
-//   var newBlogPost = {title: title, image: image, body: body, created: created}
-//   // create a new company and save to db
-//   Blog.create(newBlogPost, (err, newlyCreated) => {
-//     if(err) {
-//       console.log('err');
-//     } else {
-//       // redirect back to the companies page
-//       res.redirect('/blogs');
-//     }
-//   });
-// });
-
 // new route. Displays form to make a new blog post
-// app.get('/blogs/new', (req, res) => res.render('../client/src/views/new.ejs'));
+app.get('/blogs/new', (req, res) => res.render('../client/src/views/new'));
 
-// //show route. shows more info about one blog post
-// app.get('/blogs/:id', (req, res) => {
-//   Blog.findById(req.params.id, (err, foundBlog) => {
-//     if(err) {
-//       console.log(err);
-//     } else {
-//       res.render('../client/src/views/show', {company: foundBlog});
-//     }
-//   });
-// })
+//show route. shows more info about one blog post
+app.get('/blogs/:id', (req, res) => {
+  Blog.findById(req.params.id, (err, foundBlog) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('../client/src/views/show', {company: foundBlog});
+    }
+  });
+})
+
+// create route. Add new blog post to DB.
+app.post('/blogs', (req, res) => {
+  Blog.create(req.body.blog, (err, newBlog) => {
+    if(err) {
+      res.render('../client/src/views/new');
+    } else {
+      // redirect back to the companies page
+      res.redirect('/blogs');
+    }
+  });
+});
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 app.listen(5000, () => console.log('glasskey server is listening on port 5000!'));

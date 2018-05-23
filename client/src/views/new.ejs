@@ -1,0 +1,13 @@
+<% include partials/header %>
+
+  <div>
+    <div class="new-blog-container">NEW BLOG</div>
+    <form action="/blogs" method="POST">
+      <input type="text" name="blog[title]" placeholder="title">
+      <input type="text" name="blog[image]" placeholder="image">
+      <textarea name="blog[body]" placeholder="blog post goes here"></textarea>
+      <input type="submit">
+    </form>
+  </div>
+
+<% include partials/footer %>

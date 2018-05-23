@@ -8,7 +8,7 @@ body {
   display: flex;
   font-family: 'open sans', sans-serif;
   font-size: 16px;
-  background-color: #bbb;
+  background-color: #fff;
   justify-content: center;
   align-content: center;
   overflow-wrap: auto;
@@ -167,6 +167,13 @@ img {
   grid-area: thumb;
   max-width: 275px;
   max-height: 145px;
+}
+
+.new-blog-container {
+  min-height: 150px;
+  min-width: 150px;
+  border-radius: 4px;
+  border: solid 3px #c1c1c1;
 }
 
 footer{
