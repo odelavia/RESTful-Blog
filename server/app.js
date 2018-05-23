@@ -49,9 +49,9 @@ app.get('/blogs/new', (req, res) => res.render('../client/src/views/new'));
 app.get('/blogs/:id', (req, res) => {
   Blog.findById(req.params.id, (err, foundBlog) => {
     if(err) {
-      console.log(err);
+      res.redirect('/blogs');
     } else {
-      res.render('../client/src/views/show', {company: foundBlog});
+      res.render('../client/src/views/show', {blog: foundBlog});
     }
   });
 })
