@@ -1,16 +1,19 @@
-const bodyParser = require('body-parser'),
-methodOverride   = require('method-override'),
-mongoose         = require('mongoose'),
-express          = require('express'),
-path             = require('path'),
-app              = express();
+const expressSanitizer = require('express-sanitizer'),
+methodOverride         = require('method-override'),
+bodyParser             = require('body-parser'),
+mongoose               = require('mongoose'),
+express                = require('express'),
+path                   = require('path'),
+app                    = express();
 
 //app config
 mongoose.connect('mongodb://localhost/restful_blog');
 app.set('view engine', 'ejs');  //allows us to use EJS and also not have to type .EJS
 app.use(express.static(__dirname + '../client/dist'));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer());  // has to put somewhere after bodyParser
 app.use(methodOverride('_method'));
+
 
 //mongoose model config
 var blogSchema = new mongoose.Schema({
@@ -60,6 +63,7 @@ app.get('/blogs/:id', (req, res) => {
 
 // create route. Add new blog post to DB.
 app.post('/blogs', (req, res) => {
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.create(req.body.blog, (err, newBlog) => {
     if(err) {
       res.render('../client/src/views/new');
@@ -70,7 +74,7 @@ app.post('/blogs', (req, res) => {
   });
 });
 
-// edite route. edit current blog post.
+// edit route. edit current blog post.
 app.get('/blogs/:id/edit', (req, res) => {
   Blog.findById(req.params.id, (err, foundBlog) => {
     if(err) {
@@ -83,6 +87,7 @@ app.get('/blogs/:id/edit', (req, res) => {
 
 // update route. update current blog post
 app.put('/blogs/:id', (req, res) => {
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
     if(err) {
       res.redirect('/blogs');
