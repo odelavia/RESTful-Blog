@@ -3,6 +3,7 @@ methodOverride         = require('method-override'),
 bodyParser             = require('body-parser'),
 mongoose               = require('mongoose'),
 express                = require('express'),
+moment                 = require('moment'),
 path                   = require('path'),
 app                    = express();
 
@@ -14,13 +15,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());  // has to put somewhere after bodyParser
 app.use(methodOverride('_method'));
 
+let date = moment().format("MMM Do"); //Date.now
 
 //mongoose model config
 var blogSchema = new mongoose.Schema({
   title: String,
   image: {type: String, default: 'placeholderimage.jpg'},
   body: String,
-  created: {type: Date, default: Date.now}
+  created: {type: String, default: date}
 })
 var Blog = mongoose.model('Blog', blogSchema);
 
