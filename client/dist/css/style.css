@@ -318,7 +318,7 @@ button {
   justify-items: center;
 } */
 
-  .thumbnail h4 {
+  /* .thumbnail h4 {
     grid-area: caption;
     display: flex;
     justify-content: center;
@@ -327,15 +327,24 @@ button {
 
 img {
   grid-area: thumb;
-  /* max-width: 275px;
-  max-height: 145px; */
-}
+  max-width: 275px;
+  max-height: 145px;
+} */
 
 .new-blog-container {
-  min-height: 150px;
-  min-width: 150px;
+  display: flex;
+  margin: 30px auto;
+  justify-content: center;
+  align-items: center;
+  min-height: 75px;
+  width: 500px;
   border-radius: 4px;
   border: solid 3px #c1c1c1;
+}
+
+.new-form {
+  display: flex;
+  justify-content: center;
 }
 
 footer{
