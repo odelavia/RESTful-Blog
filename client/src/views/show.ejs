@@ -1,14 +1,28 @@
 <% include partials/header %>
 
-<div>
-  <div><%= blog.title %></div>
-  <img src="<%= blog.image %>">
-  <span><%= blog.created %></span>
-  <p><%= blog.body %></p>
+<div class="show-wrapper">
+  <div class="show-content">
+    <div class="author-card">
+      <div class='show-author-img'></div>
+      <div class="show-author-text">
+        <p class='show-author'>Oliver De La Via</p>
+        <p class="show-series">Series</p>
+        <div class="show-dateNread">
+          <span class='show-created'><%= blog.created %></span>
+          <p class="show-read-time">5 min read</p>
+        </div>
+      </div>
+    </div>
+    <div class="show-title"><%= blog.title %></div>
+    <img class="show-img" src="<%= blog.image %>">
+    <p class="show-body"><%= blog.body %></p>
+  </div>
+  <div class="show-btns">
+    <a class="btn" href="/blogs/<%= blog._id %>/edit">Edit</a>
+    <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+      <button>Delete</button>
+    </form>
+  </div>
 </div>
-<a class="btn" href="/blogs/<%= blog._id %>/edit">Edit</a>
-<form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-  <button>Delete</button>
-</form>
 
 <% include partials/footer %>

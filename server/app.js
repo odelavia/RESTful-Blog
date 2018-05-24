@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());  // has to put somewhere after bodyParser
 app.use(methodOverride('_method'));
 
-let date = moment().format("MMM Do"); //Date.now
+let date = moment().format("MMM Do, YYYY"); //Date.now
 
 //mongoose model config
 var blogSchema = new mongoose.Schema({

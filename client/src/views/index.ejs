@@ -8,7 +8,7 @@
         <div class="blog-text-wrapper">
           <h2 class='blog-title'><%= blog.title %></h2>
           <div class="blog-body-container">
-            <p class='blog-body'><%= blog.body.substring(0, 200) %>... <a class='read-more' href="/blogs/<%= blog._id %>">Read More</a></p>
+            <p class='blog-body'><%- blog.body.substring(0, 200) %>... <a class='read-more' href="/blogs/<%= blog._id %>">Read More</a></p>
           </div>
           <div class="author-container">
             <div class='author-img'></div>
